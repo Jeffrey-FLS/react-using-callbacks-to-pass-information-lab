@@ -9,8 +9,25 @@ export default class Matrix extends Component {
     super()
   }
 
+  state = {
+    colorPallette: "fff"
+  };
+
+
+  pickColor = (event) => {
+    this .setState({
+      colorPallette: event.target.style.backgroundColor
+    });
+
+    // console.log(this.state.colorPallette);
+  };
+
+  // cellColorChange = () => {
+  //
+  // }
+
   genRow = (vals) => (
-    vals.map((val, idx) => <Cell key={idx} color={val} />)
+    vals.map((val, idx) => <Cell key={idx} color={val} colorPallette={this.state.colorPallette}/>)
   )
 
   genMatrix = () => (
@@ -20,7 +37,7 @@ export default class Matrix extends Component {
   render() {
     return (
       <div id="app">
-        <ColorSelector />
+        <ColorSelector pickColor={this.pickColor}/>
         <div id="matrix">
           {this.genMatrix()}
         </div>
